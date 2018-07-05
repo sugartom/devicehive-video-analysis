@@ -125,7 +125,8 @@ class YoloBaseModel(BaseModel):
 
 class Yolo2Model(YoloBaseModel):
 
-    _checkpoint_path = 'data/yolo2/yolo_model.ckpt'
+    # _checkpoint_path = 'data/yolo2/yolo_model.ckpt'
+    _checkpoint_path = '/home/yitao/Documents/fun-project/devicehive-yolo/yolo_ckpt/yolo_model.ckpt'
     _names_path = 'data/yolo2/yolo2.names'
     _anchors = [[0.57273, 0.677385], [1.87446, 2.06253], [3.33843, 5.47434],
                 [7.88282, 3.52778], [9.77052, 9.16828]]

@@ -122,3 +122,4 @@ def evaluate(yolo_outputs, image_shape, max_boxes=10, score_threshold=.6,
     scores = tf.gather(scores, nms_index)
     classes = tf.gather(classes, nms_index)
     return tf.cast(tf.round(boxes), tf.int32), scores, classes
+    # return classes

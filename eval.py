@@ -120,7 +120,7 @@ def evaluate(_):
 
 
 if __name__ == '__main__':
-    tf.flags.DEFINE_string('video', 0, 'Path to the video file.')
+    tf.flags.DEFINE_string('video', '/home/yitao/Documents/fun-project/actions_demo/videos/indoor_two_ppl.avi', 'Path to the video file.')
     tf.flags.DEFINE_string('model_name', 'Yolo2Model', 'Model name to use.')
 
     tf.app.run(main=evaluate)
