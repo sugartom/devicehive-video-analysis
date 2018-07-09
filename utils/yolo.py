@@ -110,6 +110,7 @@ def evaluate(yolo_outputs, image_shape, max_boxes=10, score_threshold=.6,
                                           threshold=score_threshold)
 
     # Scale boxes back to original image shape.
+    # [Yitao] since image_shape here is not the real image shape, instead, it is always (608, 608), so we leave it to client to resize the bounding box
     image_shape = tf.cast(image_shape, tf.float32)
     image_dims = tf.concat([image_shape, image_shape], axis=0)
     image_dims = tf.expand_dims(image_dims, 0)
@@ -122,4 +123,4 @@ def evaluate(yolo_outputs, image_shape, max_boxes=10, score_threshold=.6,
     scores = tf.gather(scores, nms_index)
     classes = tf.gather(classes, nms_index)
     return tf.cast(tf.round(boxes), tf.int32), scores, classes
-    # return classes
+    # return boxes, scores, classes

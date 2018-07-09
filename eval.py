@@ -46,6 +46,8 @@ def evaluate(_):
     source_h = cam.get(cv2.CAP_PROP_FRAME_HEIGHT)
     source_w = cam.get(cv2.CAP_PROP_FRAME_WIDTH)
 
+    # print("image size = (%d, %d)" % (source_h, source_w))
+
     model_cls = find_class_by_name(FLAGS.model_name, [yolo])
     model = model_cls(input_shape=(source_h, source_w, 3))
     model.init()
@@ -56,6 +58,8 @@ def evaluate(_):
     try:
         while True:
             ret, frame = cam.read()
+
+            # cv2.imwrite("1.png", frame)
 
             if not ret:
                 logger.info('Can\'t read video data. Potential end of stream')
@@ -73,6 +77,8 @@ def evaluate(_):
                 color = o['color']
                 class_name = o['class_name']
 
+                # print("[%s] l = %d, r = %d, t = %d, b = %d" % (class_name, x1, x2, y1, y2))
+
                 # Draw box
                 cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
 
@@ -84,6 +90,10 @@ def evaluate(_):
                               color, thickness=cv2.FILLED)
                 cv2.putText(frame, class_name, (x1, y1-baseline),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 0), 1)
+
+            # cv2.imwrite("2.png", frame)
+
+            # return
 
             end_time = time.time()
             fps = fps * 0.9 + 1/(end_time - start_time) * 0.1
