@@ -52,10 +52,16 @@ class YoloBaseModel(BaseModel):
         # TODO: We can merge normalization with other OPs, but we need to
         # redefine input tensor for this. Anyway this works faster then
         # normalizing input data with python or openCV or numpy.
+
+        # do need image pre-processing in dh-yolo
         normalized = self._sess.run(self._raw_out,
                                     feed_dict={self._raw_inp: matrix})
         return self._sess.run(self._eval_ops,
                               feed_dict={self._eval_inp: normalized})
+
+        # # no need image pre-processing in dh-yolo
+        # return self._sess.run(self._eval_ops,
+                                # feed_dict={self._eval_inp: matrix})
 
     def init(self):
         if bool(self.labels) == bool(self._names_path):
@@ -126,7 +132,13 @@ class YoloBaseModel(BaseModel):
 class Yolo2Model(YoloBaseModel):
 
     # _checkpoint_path = 'data/yolo2/yolo_model.ckpt'
+
+    # do need image pre-processing in dh-yolo
     _checkpoint_path = '/home/yitao/Documents/fun-project/devicehive-yolo/yolo_ckpt/yolo_model.ckpt'
+
+    # # no need image pre-processing in dh-yolo
+    # _checkpoint_path = '/home/yitao/Downloads/test/20180709/flow_yolo_ckpt/yolo_model.ckpt'
+
     _names_path = 'data/yolo2/yolo2.names'
     _anchors = [[0.57273, 0.677385], [1.87446, 2.06253], [3.33843, 5.47434],
                 [7.88282, 3.52778], [9.77052, 9.16828]]

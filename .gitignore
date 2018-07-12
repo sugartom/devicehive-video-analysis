@@ -3,4 +3,4 @@ __pycache__
 .idea
 /data
 devicehive_yolo
-devicehive_yolo_backup
+devicehive_yolo_*
